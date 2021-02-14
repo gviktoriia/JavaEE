@@ -1,14 +1,12 @@
 package kma.topic8.springrestsample.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor(staticName = "of")
+@Data(staticConstructor = "of")
 public class LoginResponseDto {
 
     private final String login;
