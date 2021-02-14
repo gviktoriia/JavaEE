@@ -1,4 +1,4 @@
-package kma.practice4.applicationproperties;
+package kma.practice5.applicationproperties;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package kma.practice4.applicationproperties;
+package kma.practice5.applicationproperties;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
