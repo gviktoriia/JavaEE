@@ -1,5 +1,7 @@
 package kma.practice5.profiles;
 
+import java.util.Map;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -15,8 +17,8 @@ public class ProfilesExampleApplication {
 		applicationContext.getBean(PropertiesPrinter.class)
 			.printInfo();
 
-		NotificationService notificationService = applicationContext.getBean(NotificationService.class);
-		notificationService.sendNotification("email@example.com", "you order is ready");
+		Map<String, NotificationService> notificationService = applicationContext.getBeansOfType(NotificationService.class);
+		notificationService.values().forEach(service -> service.sendNotification("email@example.com", "you order is ready"));
 	}
 
 }
