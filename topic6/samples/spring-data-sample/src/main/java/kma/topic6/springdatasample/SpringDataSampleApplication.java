@@ -3,8 +3,6 @@ package kma.topic6.springdatasample;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import org.hibernate.LazyInitializationException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,10 +14,10 @@ import kma.topic6.springdatasample.embedded.ApartmentService;
 import kma.topic6.springdatasample.embedded.BillingEntity;
 
 @SpringBootApplication
-public class SpringWebSampleApplication {
+public class SpringDataSampleApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext applicationContext = SpringApplication.run(SpringWebSampleApplication.class, args);
+		ApplicationContext applicationContext = SpringApplication.run(SpringDataSampleApplication.class, args);
 
 		System.out.println("=== USER EXAMPLE ===");
 		userExample(applicationContext);
@@ -55,7 +53,7 @@ public class SpringWebSampleApplication {
 
 		System.out.println("create billings for apartment " + firstApartment);
 		service.createBilling(firstApartment, LocalDate.of(2020, 1, 1), 100);
-		service.createBilling(firstApartment, LocalDate.of(2020, 1, 2), 100);
+		service.createBilling(firstApartment, LocalDate.of(2020, 1, 2), 150);
 
 		System.out.println("create billings for apartment " + secondApartment);
 		service.createBilling(secondApartment, LocalDate.of(2020, 1, 1), 100);

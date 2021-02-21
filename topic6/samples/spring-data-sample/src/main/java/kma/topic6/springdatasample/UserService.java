@@ -50,7 +50,7 @@ public class UserService {
     }
 
     public UserEntity findByEmail(String email) {
-        return entityManager.createNamedQuery(UserEntity.FIND_BY_EMAIL, UserEntity.class)
+        return entityManager.createQuery("SELECT u FROM UserEntity u WHERE u.email = :email", UserEntity.class)
             .setParameter("email", email)
             .getSingleResult();
     }
