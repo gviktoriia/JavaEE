@@ -53,4 +53,17 @@ public class ApartmentService {
         return entityManager.find(BillingEntity.class, apartmentBillingId);
     }
 
+    @Transactional
+    public BillingEntity getBillingByIdWithFetch(ApartmentBillingId apartmentBillingId) {
+        return entityManager.createQuery(
+            "select b from BillingEntity b "
+                + "join fetch b.apartment apartment "
+                + "join fetch apartment.billings "
+                + "where b.id = :id ",
+            BillingEntity.class
+        )
+            .setParameter("id", apartmentBillingId)
+            .getSingleResult();
+    }
+
 }

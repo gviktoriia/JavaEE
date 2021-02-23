@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,7 +21,8 @@ import lombok.ToString;
 @Table(name = "apartment")
 @Getter
 @Setter
-@ToString
+@EqualsAndHashCode(exclude = "billings")
+@ToString(exclude = "billings")
 public class ApartmentEntity {
 
     @Id
@@ -31,8 +33,7 @@ public class ApartmentEntity {
     @Column(name = "number")
     private String number;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "apartment_id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "apartment")
     private List<BillingEntity> billings;
 
 }

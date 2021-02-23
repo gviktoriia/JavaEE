@@ -57,6 +57,8 @@ public class SpringDataSampleApplication {
 
 		System.out.println("create billings for apartment " + secondApartment);
 		service.createBilling(secondApartment, LocalDate.of(2020, 1, 1), 100);
+		service.createBilling(secondApartment, LocalDate.of(2020, 2, 1), 100);
+		service.createBilling(secondApartment, LocalDate.of(2020, 3, 1), 100);
 
 
 		List<ApartmentEntity> apartments = service.findAllApartmentsWithoutFetch();
@@ -80,6 +82,12 @@ public class SpringDataSampleApplication {
 		LocalDate period2 = LocalDate.of(2020, 1, 2);
 		BillingEntity billingEntity = service.getBillingById(ApartmentBillingId.of(secondApartment, period2));
 		System.out.println(service.getBillingById(ApartmentBillingId.of(secondApartment, period2)));
+
+		System.out.println("================");
+		billingEntity = service.getBillingByIdWithFetch(ApartmentBillingId.of(secondApartment, period1));
+		System.out.println(billingEntity);
+		System.out.println(billingEntity.getApartment());
+		System.out.println(billingEntity.getApartment().getBillings());
 	}
 
 	private static void printBillings(final List<ApartmentEntity> apartments) {
