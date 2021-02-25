@@ -15,7 +15,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -24,7 +24,7 @@ public class UserEntity {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "first_name")
