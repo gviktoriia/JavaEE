@@ -22,7 +22,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = "billings")
-@ToString(exclude = "billings")
+@ToString
 public class ApartmentEntity {
 
     @Id
@@ -33,7 +33,7 @@ public class ApartmentEntity {
     @Column(name = "number")
     private String number;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "apartment")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "apartment")
     private List<BillingEntity> billings;
 
 }

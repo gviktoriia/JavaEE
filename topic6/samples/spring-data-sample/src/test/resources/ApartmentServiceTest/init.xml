@@ -1,0 +1,8 @@
+<dataset>
+    <apartment id="1" number="num1" />
+    <apartment id="2" number="num2" />
+
+    <billing apartment_id="1" period_date="2021-01-01" bill="100" />
+    <billing apartment_id="1" period_date="2021-02-01" bill="100" />
+    <billing apartment_id="2" period_date="2021-01-01" bill="100" />
+</dataset>
