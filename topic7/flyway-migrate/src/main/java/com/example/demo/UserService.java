@@ -21,7 +21,6 @@ public class UserService {
 
     @Transactional
     public void createUser(UserEntity user) {
-        userRepository.custom();
         userRepository.saveAndFlush(user);
     }
 
