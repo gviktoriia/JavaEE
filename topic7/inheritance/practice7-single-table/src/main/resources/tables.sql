@@ -5,5 +5,5 @@ CREATE TABLE `animals`
     `cage_number` VARCHAR(100)  NOT NULL,
     `animal_type` VARCHAR(50) NOT NULL,
     `height`      DECIMAL(4, 2) NULL,
-    `live_region` VARCHAR(250) NOT NULL
+    `live_region` VARCHAR(250) NULL
 );

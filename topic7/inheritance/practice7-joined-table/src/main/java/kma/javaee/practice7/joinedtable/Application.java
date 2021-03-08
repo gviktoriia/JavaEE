@@ -17,6 +17,7 @@ public class Application {
 		ApplicationContext applicationContext = SpringApplication.run(Application.class, args);
 
 		AnimalService animalService = applicationContext.getBean(AnimalService.class);
+		System.out.println("save giraffe");
 		GiraffeEntity giraffe = GiraffeEntity.builder()
 			.height(3.5f)
 			.cageNumber("10-a")
@@ -25,6 +26,7 @@ public class Application {
 		giraffe = animalService.saveNewAnimal(giraffe);
 		System.out.println("New giraffe: " + giraffe);
 
+		System.out.println("save wolf");
 		WolfEntity wolf = WolfEntity.builder()
 			.liveRegion("Siberia")
 			.cageNumber("20-5")
