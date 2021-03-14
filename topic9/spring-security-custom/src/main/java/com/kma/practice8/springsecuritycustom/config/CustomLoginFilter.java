@@ -6,6 +6,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,7 +16,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kma.practice8.springsecuritycustom.domain.security.MyCustomUserDetails;
+import com.kma.practice8.springsecuritycustom.domain.security.AuthenticatedUser;
+import com.kma.practice8.springsecuritycustom.service.JwtTokenGenerator;
 
 import lombok.SneakyThrows;
 import lombok.Value;
@@ -23,9 +25,15 @@ import lombok.Value;
 public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final ObjectMapper objectMapper;
+    private final JwtTokenGenerator jwtTokenGenerator;
 
-    CustomLoginFilter(final AuthenticationManager authenticationManager, final ObjectMapper objectMapper) {
+    CustomLoginFilter(
+        final AuthenticationManager authenticationManager,
+        final ObjectMapper objectMapper,
+        final JwtTokenGenerator jwtTokenGenerator
+    ) {
         this.objectMapper = objectMapper;
+        this.jwtTokenGenerator = jwtTokenGenerator;
         setAuthenticationManager(authenticationManager);
     }
 
@@ -46,10 +54,11 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
         final FilterChain chain, final Authentication auth) {
 
         SecurityContextHolder.getContext().setAuthentication(auth);
-        final MyCustomUserDetails authenticatedUser = (MyCustomUserDetails) auth.getPrincipal();
+        final AuthenticatedUser authenticatedUser = (AuthenticatedUser) auth.getPrincipal();
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.getWriter().write(objectMapper.writeValueAsString(authenticatedUser));
+        response.setHeader(HttpHeaders.AUTHORIZATION, jwtTokenGenerator.generateToken(authenticatedUser));
     }
 
     @SneakyThrows

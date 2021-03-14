@@ -5,14 +5,13 @@ import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.kma.practice8.springsecuritycustom.domain.entities.PermissionEntity;
 import com.kma.practice8.springsecuritycustom.domain.entities.UserEntity;
-import com.kma.practice8.springsecuritycustom.domain.security.MyCustomUserDetails;
+import com.kma.practice8.springsecuritycustom.domain.security.AuthenticatedUser;
 import com.kma.practice8.springsecuritycustom.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -27,12 +26,11 @@ public class MyUserDetailsService implements UserDetailsService {
         final UserEntity user = userRepository.findByLogin(username)
             .orElseThrow(() -> new UsernameNotFoundException("No user with login: " + username));
 
-        return new MyCustomUserDetails(
+        return new AuthenticatedUser(
             username,
             user.getPassword(),
             mapAuthorities(user.getPermissions()),
-            user.getCustomAuthField(),
-            "company1"
+            user.getCompany()
         );
     }
 

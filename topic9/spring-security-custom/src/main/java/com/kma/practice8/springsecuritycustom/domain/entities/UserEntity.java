@@ -36,8 +36,8 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "custom_auth_field")
-    private String customAuthField;
+    @Column(name = "company")
+    private String company;
 
     @ManyToMany
     @JoinTable(

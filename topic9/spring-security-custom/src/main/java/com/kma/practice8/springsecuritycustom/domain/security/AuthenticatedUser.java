@@ -1,6 +1,5 @@
 package com.kma.practice8.springsecuritycustom.domain.security;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -11,20 +10,17 @@ import lombok.ToString;
 
 @Getter
 @ToString(callSuper = true)
-public class MyCustomUserDetails extends User {
+public class AuthenticatedUser extends User {
 
-    private final String customAuthField;
     private final String companyAlias;
 
-    public MyCustomUserDetails(
+    public AuthenticatedUser(
         final String username,
         final String password,
         final List<? extends GrantedAuthority> authorities,
-        final String customAuthField,
         final String companyAlias
     ) {
         super(username, password, authorities);
-        this.customAuthField = customAuthField;
         this.companyAlias = companyAlias;
     }
 }

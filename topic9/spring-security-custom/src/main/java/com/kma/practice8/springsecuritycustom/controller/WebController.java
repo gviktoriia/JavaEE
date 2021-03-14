@@ -1,52 +1,39 @@
 package com.kma.practice8.springsecuritycustom.controller;
 
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class WebController {
-
-    @GetMapping("/")
-    public String index() {
-        return "index";
-    }
 
     @PreAuthorize("hasAuthority('VIEW_ADMIN')")
     @GetMapping("/admin")
-    public String admin() {
-        return "admin_root";
-    }
-
-    @PreAuthorize("hasAuthority('VIEW_ADMIN')")
-    @GetMapping("/admin/subpage")
-    public String adminSubpage() {
-        return "admin_sub";
+    public List<String> admin() {
+        return List.of("admin_string");
     }
 
     @PreAuthorize("hasAuthority('VIEW_CATALOG')")
     @GetMapping("/catalog")
-    public String catalog() {
-        return "catalog";
+    public ResponseEntity<String> catalog() {
+        return ResponseEntity.ok("catalog");
     }
 
     @GetMapping("/other")
-    public String other() {
-        return "other";
-    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+    public ResponseEntity<String> other() {
+        return ResponseEntity.ok("other");
     }
 
     @PreAuthorize("hasAuthority('VIEW_ADMIN') || authentication.principal.companyAlias == #cAlias")
     @GetMapping("/company/{cAlias}")
-    public String companyDetail(@PathVariable("cAlias") final String cAlias, final Model model) {
-        model.addAttribute("companyAlias", cAlias);
-        return "company_page";
+    public ResponseEntity<String> companyDetail(@PathVariable("cAlias") final String cAlias) {
+        return ResponseEntity.ok("allow only for user which request same company or admin");
     }
 
 }

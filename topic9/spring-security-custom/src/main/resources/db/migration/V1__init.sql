@@ -3,7 +3,7 @@ create table users
     id       int primary key auto_increment,
     login    varchar(30) not null,
     password varchar(40) not null,
-    custom_auth_field varchar(40) not null,
+    company varchar(40) not null,
     unique uniq_login (login)
 );
 
@@ -21,10 +21,10 @@ create table user_to_permissions (
     constraint fk_user_to_permission_permission foreign key (permission_id) references permissions(id)
 );
 
-insert into users (login, password, custom_auth_field) values
-    ('admin', 'password', 'admin custom auth field'),
-    ('catalog', 'password', 'some other custom auth field for catalog'),
-    ('user', 'password', 'custom user field');
+insert into users (login, password, company) values
+    ('admin', 'password', 'admin-company'),
+    ('catalog', 'password', 'catalog-company'),
+    ('user', 'password', 'user-company');
 
 insert into permissions (permission) values
     ('VIEW_ADMIN'),

@@ -8,17 +8,17 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kma.practice8.springsecuritycustom.domain.type.Permission;
 import com.kma.practice8.springsecuritycustom.repositories.UserRepository;
+import com.kma.practice8.springsecuritycustom.service.JwtTokenGenerator;
 import com.kma.practice8.springsecuritycustom.service.MyUserDetailsService;
 
 import lombok.RequiredArgsConstructor;
@@ -31,6 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserRepository userRepository;
     private final ObjectMapper objectMapper;
+    private final JwtTokenGenerator jwtTokenGenerator;
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
@@ -39,8 +40,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .anyRequest().permitAll()
             .and()
-            .addFilter(logoutFilter())
-            .addFilterBefore(customLoginFilter(), UsernamePasswordAuthenticationFilter.class);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+                .addFilter(logoutFilter())
+                .addFilterBefore(customLoginFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new AuthenticationFilter(userDetailsService(), jwtTokenGenerator), CustomLoginFilter.class);
     }
 
     @Bean
@@ -57,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private CustomLoginFilter customLoginFilter() {
-        final CustomLoginFilter customLoginFilter =  new CustomLoginFilter(authenticationManagerBean(), objectMapper);
+        final CustomLoginFilter customLoginFilter =  new CustomLoginFilter(authenticationManagerBean(), objectMapper, jwtTokenGenerator);
         customLoginFilter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/my-login", POST.name()));
 
         return customLoginFilter;
