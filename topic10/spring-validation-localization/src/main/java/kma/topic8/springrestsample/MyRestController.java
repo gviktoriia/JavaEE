@@ -8,10 +8,13 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.Validator;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kma.topic8.springrestsample.dto.UserDto;
@@ -22,6 +25,12 @@ import lombok.RequiredArgsConstructor;
 public class MyRestController {
 
     private final Validator validator;
+    private final MessageSource messageSource;
+
+    @RequestMapping(value = "/text-by-code", method = RequestMethod.GET)
+    public ResponseEntity<String> getTextByCode(@RequestParam("code") final String code) {
+        return ResponseEntity.ok(messageSource.getMessage(code, null, LocaleContextHolder.getLocale()));
+    }
 
     @RequestMapping(value = "/user-handler", method = RequestMethod.POST)
     public ResponseEntity<UserDto> userHandler(
