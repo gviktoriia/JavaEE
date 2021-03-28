@@ -9,7 +9,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -33,5 +32,6 @@ public class UserDto {
 
     @NotNull(message = "Salary is required")
     @Digits(integer = 2, fraction = 2, message = "Salary is bad formatted")
+    // one of: 11, 11.1, 11.11
     private Double salary;
 }
