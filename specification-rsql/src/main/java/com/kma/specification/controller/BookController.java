@@ -37,4 +37,14 @@ public class BookController {
     public List<BookDto> getAuthorBooks(@PathVariable("id") final int authorId) {
         return bookService.getAuthorBooks(authorId);
     }
+
+    @GetMapping("/books/rsql")
+    public List<BookDto> rsqlBookSearch(
+        @RequestParam("page") final int page,
+        @RequestParam("size") final int size,
+        @RequestParam(value = "query", required = false) final String query,
+        @RequestParam(value = "sort", required = false) final String sort
+    ) {
+        return bookService.rsqlSearch(page, size, query, sort);
+    }
 }

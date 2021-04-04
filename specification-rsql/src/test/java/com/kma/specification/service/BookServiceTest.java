@@ -45,4 +45,11 @@ class BookServiceTest {
             .containsExactly(2, 3, 4, 5);
     }
 
+    @Test
+    void rsqlTest() {
+        assertThat(bookService.rsqlSearch(0, 3, "authors.id=in=(2)", "category.id,desc"))
+            .extracting(BookDto::getId)
+            .containsExactly(2, 5);
+    }
+
 }

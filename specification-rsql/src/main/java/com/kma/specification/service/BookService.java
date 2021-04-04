@@ -25,6 +25,7 @@ import com.kma.specification.domain.dto.CategoryDto;
 import com.kma.specification.domain.entities.BookEntity;
 import com.kma.specification.repositories.BookRepository;
 
+import io.github.perplexhub.rsql.RSQLJPASupport;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -78,6 +79,20 @@ public class BookService {
                 .and(authorBooks(authorId))
                 .and(activeOnly()),
             PageRequest.of(0, 10)
+        );
+
+        return bookPage.stream()
+            .map(BookService::mapEntityToDto)
+            .collect(Collectors.toList());
+    }
+
+    public List<BookDto> rsqlSearch(final int page, final int size, final String query, final String sort) {
+        final Page<BookEntity> bookPage = repository.findAll(
+            fetchAll()
+                .and(activeOnly())
+                .and(RSQLJPASupport.toSpecification(query))
+                .and(RSQLJPASupport.toSort(sort)),
+            PageRequest.of(page, size)
         );
 
         return bookPage.stream()
