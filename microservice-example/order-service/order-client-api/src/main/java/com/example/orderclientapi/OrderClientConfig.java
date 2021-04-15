@@ -21,7 +21,7 @@ public class OrderClientConfig {
     private final String orderApiHost;
 
     @Bean
-    public OrderApi bookOrderApi() {
+    public OrderApi orderApi() {
         log.info("Create order api to host: {}", orderApiHost);
 
         ApiClient apiClient = new ApiClient();
