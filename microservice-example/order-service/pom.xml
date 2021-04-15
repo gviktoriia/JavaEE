@@ -78,6 +78,9 @@
                     <configuration>
                         <generateSupportingFiles>false</generateSupportingFiles>
                         <modelNameSuffix>Dto</modelNameSuffix>
+                        <generateSupportingFiles>true</generateSupportingFiles>
+                        <generateApiTests>false</generateApiTests>
+                        <generateModelTests>false</generateModelTests>
                         <configOptions>
                             <interfaceOnly>true</interfaceOnly>
                             <dateLibrary>java8</dateLibrary>

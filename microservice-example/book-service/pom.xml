@@ -107,10 +107,13 @@
                 </executions>
                 <configuration>
                     <generatorName>spring</generatorName>
-                    <modelPackage>com.kma.openapiexample.controller.rest.model</modelPackage>
-                    <apiPackage>com.kma.openapiexample.controller.rest.api</apiPackage>
+                    <modelPackage>com.example.bookservice.controller.rest.model</modelPackage>
+                    <apiPackage>com.example.bookservice.controller.rest.api</apiPackage>
                     <generateSupportingFiles>true</generateSupportingFiles>
                     <modelNameSuffix>Dto</modelNameSuffix>
+                    <generateApiTests>false</generateApiTests>
+                    <generateModelTests>false</generateModelTests>
+                    <addTestCompileSourceRoot>false</addTestCompileSourceRoot>
                     <configOptions>
                         <library>spring-mvc</library>
                         <interfaceOnly>true</interfaceOnly>

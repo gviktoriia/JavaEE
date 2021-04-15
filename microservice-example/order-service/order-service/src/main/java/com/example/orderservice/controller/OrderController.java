@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.orderservice.service.OrderService;
-import com.kma.openapiexample.controller.rest.api.OrderApi;
-import com.kma.openapiexample.controller.rest.model.OrderDto;
+import com.example.orderservice.controller.rest.api.OrderApi;
+import com.example.orderservice.controller.rest.model.OrderDto;
 
 import lombok.RequiredArgsConstructor;
 

@@ -73,8 +73,8 @@
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <configuration>
                     <generatorName>spring</generatorName>
-                    <modelPackage>com.kma.openapiexample.controller.rest.model</modelPackage>
-                    <apiPackage>com.kma.openapiexample.controller.rest.api</apiPackage>
+                    <modelPackage>com.example.orderservice.controller.rest.model</modelPackage>
+                    <apiPackage>com.example.orderservice.controller.rest.api</apiPackage>
                     <configOptions>
                         <library>spring-mvc</library>
                     </configOptions>

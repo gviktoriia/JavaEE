@@ -2,7 +2,7 @@ package com.example.orderservice.service;
 
 import org.springframework.stereotype.Service;
 
-import com.kma.openapiexample.controller.rest.model.OrderDto;
+import com.example.orderservice.controller.rest.model.OrderDto;
 
 import lombok.extern.slf4j.Slf4j;
 

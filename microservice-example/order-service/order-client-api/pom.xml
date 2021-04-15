@@ -107,8 +107,8 @@
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <configuration>
                     <generatorName>java</generatorName>
-                    <modelPackage>com.kma.openapiexample.client.model</modelPackage>
-                    <apiPackage>com.kma.openapiexample.client.api</apiPackage>
+                    <modelPackage>com.example.orderservice.client.model</modelPackage>
+                    <apiPackage>com.example.orderservice.client.api</apiPackage>
                     <generateSupportingFiles>true</generateSupportingFiles>
                     <configOptions>
                         <library>feign</library>

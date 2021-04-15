@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
-import com.kma.openapiexample.client.api.OrderApi;
-import com.kma.openapiexample.client.model.OrderDto;
-import com.kma.openapiexample.controller.rest.model.BookOrderDto;
+import com.example.orderservice.client.api.OrderApi;
+import com.example.orderservice.client.model.OrderDto;
+import com.example.bookservice.controller.rest.model.BookOrderDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
