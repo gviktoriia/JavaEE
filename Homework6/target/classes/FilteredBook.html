@@ -1,0 +1,13 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Form Control: GET</title>
+</head>
+<body>
+<tr th:each="book: ${word}">
+    <td th:text="${book}"></td>
+</tr>
+<br>
+<a href="/" th:text="Return"></a>
+<br>
+</body>
+</html>
